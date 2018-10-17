@@ -31,7 +31,6 @@ var csvGenerator = (report) => {
   }
   recurse(report);
   //console.log(str);
-
   return str;
 
 }

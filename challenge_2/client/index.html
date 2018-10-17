@@ -2,16 +2,28 @@
 <html>
 <head>
   <title>CSV Report Generator</title>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 </head>
 <body>
   <h1>CSV Report Generator</h1>
-  <div>
+  <div id="formDiv">
     <form id="form">
       <textarea name="sales_report" rows="25" cols="75" id="text"></textarea>
       <br>
       <input type="submit" id="input" />
     </form>
   </div>
+<!--   <br>
+  <div>
+    <form id="file">
+      <input type="file" id="file2" />
+      <br>
+      <input type="submit" id="file3" />
+    </form>
+  </div> -->
   <script src="app.js"></script>
 </body>
 </html>
