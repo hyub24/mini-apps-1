@@ -6,11 +6,13 @@
 <body>
   <h1>CSV Report Generator</h1>
   <div>
-    <form action='/csv' method='POST'>
-      <textarea></textarea>
-      <input type="submit" />
+    <form id="form">
+      <textarea name="sales_report" rows="25" cols="75" id="text"></textarea>
+      <br>
+      <input type="submit" id="input" />
     </form>
   </div>
+  <script src="app.js"></script>
 </body>
 </html>
 
