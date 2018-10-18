@@ -17,7 +17,6 @@ class App extends React.Component {
     })
 
     this.account = Object.assign(this.accountInfo, formObj);
-    console.log(this.accountInfo)
   }
 
   render() {
@@ -76,14 +75,6 @@ class FormOne extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // $.ajax({
-    //   url: '/formone',
-    //   method: 'POST',
-    //   data: JSON.stringify(this.state),
-    //   contentType: 'application/json',
-    //   success: ()=>{},
-    //   error: ()=>{}
-    // });
     this.props.changePage('form2', this.state);
   }
 
@@ -157,14 +148,6 @@ class FormTwo extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    $.ajax({
-      url: '/formtwo',
-      method: 'POST',
-      data: JSON.stringify(this.state),
-      contentType: 'application/json',
-      success: ()=>{},
-      error: ()=>{}
-    })
     this.props.changePage('form3', this.state);
   }
 
@@ -233,16 +216,6 @@ class FormThree extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    fetch('/formthree', {
-      method: 'POST',
-      headers: {
-        contentType: 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    })
-    .then()
-    .catch();
-
     this.props.changePage('confirm', this.state);
   }
 
@@ -266,19 +239,43 @@ class FormThree extends React.Component {
   }
 }
 
-var Confirmation = (props) => (
-  <div>
-    <h1>Confirmation Page</h1>
+var Confirmation = (props) => {
+
+  var sendInfo = () => {
+    fetch('/purchase', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(props.accountInfo)
+    })
+    .then()
+    .catch();
+  }
+
+  return (
     <div>
-      name: {props.accountInfo.name} <br/>
-      email: {props.accountInfo.email} <br/>
-      password: {props.accountInfo.password} <br/>
-      <h2>Shipping Address</h2>
-      line 1: {props.accountInfo.line1} <br/>
-      line 2: {props.accountInfo.line2} <br/>
+      <h1>Confirmation Page</h1>
+      <div>
+        <h3>General Account Info</h3>
+        name: {props.accountInfo.name} <br/>
+        email: {props.accountInfo.email} <br/>
+        password: {props.accountInfo.password} <br/>
+        <h3>Shipping Address</h3>
+        line 1: {props.accountInfo.line1} <br/>
+        line 2: {props.accountInfo.line2} <br/>
+        city: {props.accountInfo.city} <br/>
+        state: {props.accountInfo.state} <br/>
+        zipcode: {props.accountInfo.zipcode} <br/>
+        phone number: {props.accountInfo.phone} <br/>
+        <h3>Billing Info</h3>
+        credit card number: {props.accountInfo.credit} <br/>
+        billing zipcode: {props.accountInfo.billing} <br/>
+      </div>
+      <br/>
+      <button onClick={() => {props.changePage('checkout'); sendInfo()}}>Purchase</button>
     </div>
-    <button onClick={() => props.changePage('checkout')}>Purchase</button>
-  </div>
-)
+  )
+}
 
 ReactDOM.render(<App />, document.getElementById('app'));
